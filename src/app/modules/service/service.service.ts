@@ -23,6 +23,9 @@ const getSingleService = async (id: string) => {
     where: {
       id,
     },
+    include: {
+      reviews: true,
+    },
   });
   return service;
 };
@@ -158,11 +161,10 @@ const getAllService = async (
   };
 };
 
-
 export const InternetService = {
   createService,
   getAllService,
   getSingleService,
   updateService,
-  deleteService
+  deleteService,
 };

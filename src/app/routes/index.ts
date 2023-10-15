@@ -4,6 +4,7 @@ import { BlogRoute } from '../modules/blogs/blog.route';
 import { BookingRoute } from '../modules/booking/booking.route';
 import { FaqRoute } from '../modules/faq/faq.route';
 import { FeedbackRoute } from '../modules/feedback/feedback.route';
+import { ReviewRoute } from '../modules/review/review.route';
 import { ServiceRoute } from '../modules/service/service.route';
 import { UserRoutes } from '../modules/users/user.route';
 
@@ -37,6 +38,10 @@ const moduleRoutes = [
   {
     path: '/bookings',
     route: BookingRoute,
+  },
+  {
+    path: '/reviews',
+    route: ReviewRoute,
   },
 ];
 
