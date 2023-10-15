@@ -34,4 +34,47 @@ model Service {
   hdChannel String
   connectionCost Int
   status String
+  reviews Review[]
+
+  @@map("services")
 }
+
+model Review {
+  id         String  @id @default(uuid())
+  name       String
+  email      String
+  userReview String
+  serviceId String
+  service    Service @relation(fields: [serviceId], references: [id])
+
+  @@map("reviews")
+}
+
+model FeedBack {
+  id String @id @default(uuid())
+  name String
+  email String
+  comments String
+
+  @@map("feedbacks")
+}
+
+model Blog {
+  id String @id @default(uuid())
+  title String
+  name String
+  images String
+  description String
+  createdAt    DateTime      @default(now())
+
+  @@map("blogs")
+}
+
+model Faq {
+  id String @id @default(uuid())
+  title String
+  description String
+
+  @@map("faqs")
+}
+

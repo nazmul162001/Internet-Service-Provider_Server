@@ -24,6 +24,7 @@ CREATE TABLE "Service" (
     "hdChannel" TEXT NOT NULL,
     "connectionCost" INTEGER NOT NULL,
     "status" TEXT NOT NULL,
+    "reviews" JSONB[] DEFAULT ARRAY[]::JSONB[],
 
     CONSTRAINT "Service_pkey" PRIMARY KEY ("id")
 );

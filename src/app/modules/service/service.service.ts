@@ -11,6 +11,7 @@ import {
 
 const createService = async (data: Service): Promise<Service> => {
   const result = await prisma.service.create({
+    //@ts-ignore
     data,
   });
   return result;
@@ -35,6 +36,7 @@ const updateService = async (
     where: {
       id,
     },
+    //@ts-ignore
     data,
   });
   return service;
@@ -156,10 +158,11 @@ const getAllService = async (
   };
 };
 
+
 export const InternetService = {
   createService,
   getAllService,
   getSingleService,
   updateService,
-  deleteService,
+  deleteService
 };

@@ -78,6 +78,8 @@ const deleteService = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+
+
 export const InternetServiceController = {
   createService,
   getAllService,
