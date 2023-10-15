@@ -3,8 +3,9 @@ import { InternetServiceController } from './service.controller';
 const router = express.Router();
 
 // user routes
-router.post('/create-service', InternetServiceController.insertIntoDB);
-router.patch('/:id', InternetServiceController.updateIntoDb);
-router.delete('/:id', InternetServiceController.deleteIntoDb);
+router.get('/:id', InternetServiceController.getSingleService);
+router.post('/create-service', InternetServiceController.createService);
+router.patch('/:id', InternetServiceController.updateService);
+router.delete('/:id', InternetServiceController.deleteService);
 
 export const ServiceRoute = router;

@@ -5,8 +5,8 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { InternetService } from './service.service';
 
-const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
-  const result = await InternetService.insertIntoDB(req.body);
+const createService = catchAsync(async (req: Request, res: Response) => {
+  const result = await InternetService.createService(req.body);
   sendResponse<Service>(res, {
     statusCode: httpStatus.CREATED,
     message: 'Service created successfully',
@@ -15,11 +15,23 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+// get single service
+const getSingleService = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const service = await InternetService.getSingleService(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Service retrieved successfully',
+    data: service,
+  });
+});
+
 // update service
-const updateIntoDb = catchAsync(async (req: Request, res: Response) => {
+const updateService = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const { body } = req;
-  const service = await InternetService.updateIntoDb(id, body);
+  const service = await InternetService.updateService(id, body);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -29,9 +41,9 @@ const updateIntoDb = catchAsync(async (req: Request, res: Response) => {
 });
 
 // delete book
-const deleteIntoDb = catchAsync(async (req: Request, res: Response) => {
+const deleteService = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const service = await InternetService.deleteIntDb(id);
+  const service = await InternetService.deleteService(id);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -41,7 +53,8 @@ const deleteIntoDb = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const InternetServiceController = {
-  insertIntoDB,
-  updateIntoDb,
-  deleteIntoDb,
+  createService,
+  getSingleService,
+  updateService,
+  deleteService,
 };

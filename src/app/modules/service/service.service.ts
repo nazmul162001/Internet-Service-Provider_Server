@@ -1,15 +1,25 @@
 import { Service } from '@prisma/client';
 import prisma from '../../../shared/prisma';
 
-const insertIntoDB = async (data: Service): Promise<Service> => {
+const createService = async (data: Service): Promise<Service> => {
   const result = await prisma.service.create({
     data,
   });
   return result;
 };
 
+// get single service
+const getSingleService = async (id: string) => {
+  const service = await prisma.service.findUnique({
+    where: {
+      id,
+    },
+  });
+  return service;
+};
+
 // update service
-const updateIntoDb = async (
+const updateService = async (
   id: string,
   data: Partial<Service>
 ): Promise<Service | null> => {
@@ -23,7 +33,7 @@ const updateIntoDb = async (
 };
 
 // delete service
-const deleteIntDb = async (id: string) => {
+const deleteService = async (id: string) => {
   const service = await prisma.service.delete({
     where: {
       id,
@@ -33,7 +43,8 @@ const deleteIntDb = async (id: string) => {
 };
 
 export const InternetService = {
-  insertIntoDB,
-  updateIntoDb,
-  deleteIntDb,
+  createService,
+  getSingleService,
+  updateService,
+  deleteService,
 };
