@@ -22,3 +22,16 @@ model User {
   @@map("users")
 }
 
+model Service {
+  id   String  @id @default(uuid())
+  name String   
+  price Int
+  category String
+  images String
+  location String
+  description String
+  channel String
+  hdChannel String
+  connectionCost Int
+  status String
+}
