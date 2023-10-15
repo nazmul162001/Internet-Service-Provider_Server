@@ -49,6 +49,9 @@ const getUserProfile = async (id: string): Promise<User> => {
     where: {
       id: id,
     },
+    include: {
+      bookings: true
+    },
   });
 
   if (!result) {

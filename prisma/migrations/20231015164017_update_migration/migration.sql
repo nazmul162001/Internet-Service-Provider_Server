@@ -1,18 +1,18 @@
-/*
-  Warnings:
+-- CreateEnum
+CREATE TYPE "Package" AS ENUM ('wifiInternet', 'mobileConnection', 'tvBox', 'smartHome', 'satelliteTv', 'internet', 'broadband', 'business');
 
-  - You are about to drop the `Review` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Service` table. If the table is not empty, all the data it contains will be lost.
+-- CreateTable
+CREATE TABLE "users" (
+    "id" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "role" TEXT NOT NULL DEFAULT 'user',
+    "name" TEXT NOT NULL DEFAULT '',
+    "profileImage" TEXT NOT NULL DEFAULT '',
+    "phoneNumber" TEXT NOT NULL DEFAULT '',
 
-*/
--- DropForeignKey
-ALTER TABLE "Review" DROP CONSTRAINT "Review_serviceId_fkey";
-
--- DropTable
-DROP TABLE "Review";
-
--- DropTable
-DROP TABLE "Service";
+    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "services" (
@@ -37,6 +37,7 @@ CREATE TABLE "reviews" (
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "userReview" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
     "serviceId" TEXT NOT NULL,
 
     CONSTRAINT "reviews_pkey" PRIMARY KEY ("id")
@@ -73,5 +74,30 @@ CREATE TABLE "faqs" (
     CONSTRAINT "faqs_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "bookings" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "phoneNumber" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "district" TEXT NOT NULL,
+    "thana" TEXT NOT NULL,
+    "address" TEXT NOT NULL,
+    "package" "Package" NOT NULL,
+    "userId" TEXT NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'pending',
+
+    CONSTRAINT "bookings_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+
 -- AddForeignKey
 ALTER TABLE "reviews" ADD CONSTRAINT "reviews_serviceId_fkey" FOREIGN KEY ("serviceId") REFERENCES "services"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "reviews" ADD CONSTRAINT "reviews_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "bookings" ADD CONSTRAINT "bookings_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
