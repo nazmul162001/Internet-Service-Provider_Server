@@ -14,10 +14,12 @@ model User {
   id               String            @id @default(uuid())
   email            String            @unique
   password         String
-  role             String?           @default("user")
-  name             String?           @default("")
-  profileImage     String?           @default("")
-  phoneNumber      String?           @default("")
+  role             String           @default("user")
+  name             String           @default("")
+  profileImage     String           @default("")
+  phoneNumber      String           @default("")
+  reviews          Review[]
+  bookings         Booking[]
 
   @@map("users")
 }
@@ -44,8 +46,10 @@ model Review {
   name       String
   email      String
   userReview String
+  userId String
   serviceId String
   service    Service @relation(fields: [serviceId], references: [id])
+  user    User @relation(fields: [userId], references: [id])
 
   @@map("reviews")
 }
@@ -78,3 +82,29 @@ model Faq {
   @@map("faqs")
 }
 
+model Booking {
+  id String @id @default(uuid())
+  name String
+  phoneNumber String
+  email String
+  district String
+  thana String
+  address String
+  package Package
+  userId String
+  user    User @relation(fields: [userId], references: [id])
+  status String @default("pending")
+
+  @@map("bookings")
+}
+
+enum Package {
+  wifiInternet
+  mobileConnection
+  tvBox
+  smartHome
+  satelliteTv
+  internet
+  broadband
+  business
+}
