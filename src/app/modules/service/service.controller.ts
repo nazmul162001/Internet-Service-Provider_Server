@@ -2,7 +2,12 @@ import { Service } from '@prisma/client';
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import catchAsync from '../../../shared/catchAsync';
+import pick from '../../../shared/pick';
 import sendResponse from '../../../shared/sendResponse';
+import {
+  PriceSearchableFields,
+  ServiceFilterAbleFields,
+} from './service.interface';
 import { InternetService } from './service.service';
 
 const createService = catchAsync(async (req: Request, res: Response) => {
@@ -12,6 +17,27 @@ const createService = catchAsync(async (req: Request, res: Response) => {
     message: 'Service created successfully',
     data: result,
     success: true,
+  });
+});
+
+// get all service
+const getAllService = catchAsync(async (req: Request, res: Response) => {
+  // filters
+  const filters = pick(req.query, ServiceFilterAbleFields);
+  const priceQuery = pick(req.query, PriceSearchableFields);
+  const options = pick(req.query, ['size', 'page', 'sortBy', 'sortOrder']);
+
+  const service = await InternetService.getAllService(
+    filters,
+    options,
+    priceQuery
+  );
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Service retrieved successfully',
+    meta: service.meta,
+    data: service.data,
   });
 });
 
@@ -54,6 +80,7 @@ const deleteService = catchAsync(async (req: Request, res: Response) => {
 
 export const InternetServiceController = {
   createService,
+  getAllService,
   getSingleService,
   updateService,
   deleteService,

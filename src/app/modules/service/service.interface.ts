@@ -19,7 +19,7 @@ export type IServiceFilterRequest = {
 export const ServiceSearchAbleFields = ['name', 'category', 'price'];
 
 // for filter
-export const BookFilterAbleFields = ['search', 'name', 'category', 'price'];
+export const ServiceFilterAbleFields = ['search', 'name', 'category', 'price'];
 
 export type IPriceFilters = {
   maxPrice?: number;
