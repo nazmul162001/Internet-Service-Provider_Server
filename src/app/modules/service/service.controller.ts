@@ -15,6 +15,33 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+// update service
+const updateIntoDb = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { body } = req;
+  const service = await InternetService.updateIntoDb(id, body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Service updated successfully',
+    data: service,
+  });
+});
+
+// delete book
+const deleteIntoDb = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const service = await InternetService.deleteIntDb(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Service deleted successfully',
+    data: service,
+  });
+});
+
 export const InternetServiceController = {
   insertIntoDB,
+  updateIntoDb,
+  deleteIntoDb,
 };
