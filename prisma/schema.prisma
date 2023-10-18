@@ -20,6 +20,7 @@ model User {
   phoneNumber      String           @default("")
   reviews          Review[]
   bookings         Booking[]
+  carts Cart[]
 
   @@map("users")
 }
@@ -30,6 +31,7 @@ model Service {
   price Int
   category String
   images String
+  district String
   location String
   description String
   channel String
@@ -37,8 +39,18 @@ model Service {
   connectionCost Int
   status String
   reviews Review[]
+  carts Cart[]
 
   @@map("services")
+}
+
+model Cart {
+  id String @id @default(uuid())
+  userId String
+  serviceId String
+  user User @relation(fields: [userId], references: [id])
+  service Service @relation(fields: [serviceId], references: [id])
+  
 }
 
 model Review {

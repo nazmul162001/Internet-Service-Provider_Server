@@ -21,6 +21,7 @@ CREATE TABLE "services" (
     "price" INTEGER NOT NULL,
     "category" TEXT NOT NULL,
     "images" TEXT NOT NULL,
+    "district" TEXT NOT NULL,
     "location" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "channel" TEXT NOT NULL,
@@ -29,6 +30,15 @@ CREATE TABLE "services" (
     "status" TEXT NOT NULL,
 
     CONSTRAINT "services_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "AddToCart" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "serviceId" TEXT NOT NULL,
+
+    CONSTRAINT "AddToCart_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -92,6 +102,12 @@ CREATE TABLE "bookings" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+
+-- AddForeignKey
+ALTER TABLE "AddToCart" ADD CONSTRAINT "AddToCart_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "AddToCart" ADD CONSTRAINT "AddToCart_serviceId_fkey" FOREIGN KEY ("serviceId") REFERENCES "services"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "reviews" ADD CONSTRAINT "reviews_serviceId_fkey" FOREIGN KEY ("serviceId") REFERENCES "services"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
