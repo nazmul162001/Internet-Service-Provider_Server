@@ -40,6 +40,7 @@ model Service {
   status String
   reviews Review[]
   carts Cart[]
+  bookings Booking[]
 
   @@map("services")
 }
@@ -55,7 +56,6 @@ model Cart {
 
 model Review {
   id         String  @id @default(uuid())
-  name       String
   email      String
   userReview String
   userId String
@@ -101,10 +101,13 @@ model Booking {
   email String
   district String
   thana String
+  price String
   address String
   package Package
   userId String
+  serviceId String
   user    User @relation(fields: [userId], references: [id])
+  service    Service @relation(fields: [serviceId], references: [id])
   status String @default("pending")
 
   @@map("bookings")

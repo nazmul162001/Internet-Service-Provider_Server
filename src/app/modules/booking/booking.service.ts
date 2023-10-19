@@ -36,7 +36,11 @@ const deleteBooking = async (id: string) => {
 
 // get all booking
 const getAllBooking = async () => {
-  const booking = await prisma.booking.findMany();
+  const booking = await prisma.booking.findMany({
+    include: {
+      service: true
+    }
+  });
   return booking;
 };
 

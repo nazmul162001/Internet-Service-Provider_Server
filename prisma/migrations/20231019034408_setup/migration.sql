@@ -33,12 +33,12 @@ CREATE TABLE "services" (
 );
 
 -- CreateTable
-CREATE TABLE "AddToCart" (
+CREATE TABLE "Cart" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "serviceId" TEXT NOT NULL,
 
-    CONSTRAINT "AddToCart_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Cart_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -92,9 +92,11 @@ CREATE TABLE "bookings" (
     "email" TEXT NOT NULL,
     "district" TEXT NOT NULL,
     "thana" TEXT NOT NULL,
+    "price" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "package" "Package" NOT NULL,
     "userId" TEXT NOT NULL,
+    "serviceId" TEXT NOT NULL,
     "status" TEXT NOT NULL DEFAULT 'pending',
 
     CONSTRAINT "bookings_pkey" PRIMARY KEY ("id")
@@ -104,10 +106,10 @@ CREATE TABLE "bookings" (
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- AddForeignKey
-ALTER TABLE "AddToCart" ADD CONSTRAINT "AddToCart_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Cart" ADD CONSTRAINT "Cart_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "AddToCart" ADD CONSTRAINT "AddToCart_serviceId_fkey" FOREIGN KEY ("serviceId") REFERENCES "services"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Cart" ADD CONSTRAINT "Cart_serviceId_fkey" FOREIGN KEY ("serviceId") REFERENCES "services"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "reviews" ADD CONSTRAINT "reviews_serviceId_fkey" FOREIGN KEY ("serviceId") REFERENCES "services"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -117,3 +119,6 @@ ALTER TABLE "reviews" ADD CONSTRAINT "reviews_userId_fkey" FOREIGN KEY ("userId"
 
 -- AddForeignKey
 ALTER TABLE "bookings" ADD CONSTRAINT "bookings_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "bookings" ADD CONSTRAINT "bookings_serviceId_fkey" FOREIGN KEY ("serviceId") REFERENCES "services"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

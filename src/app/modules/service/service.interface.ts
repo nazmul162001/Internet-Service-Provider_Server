@@ -16,10 +16,21 @@ export type IServiceFilterRequest = {
 };
 
 // for search
-export const ServiceSearchAbleFields = ['name', 'category', 'price'];
+export const ServiceSearchAbleFields = [
+  'name',
+  'category',
+  'price',
+  'location',
+];
 
 // for filter
-export const ServiceFilterAbleFields = ['search', 'name', 'category', 'price'];
+export const ServiceFilterAbleFields = [
+  'search',
+  'name',
+  'category',
+  'price',
+  'location',
+];
 
 export type IPriceFilters = {
   maxPrice?: number;
