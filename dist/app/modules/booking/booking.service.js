@@ -43,11 +43,7 @@ const deleteBooking = (id) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // get all booking
 const getAllBooking = () => __awaiter(void 0, void 0, void 0, function* () {
-    const booking = yield prisma_1.default.booking.findMany({
-        include: {
-            service: true
-        }
-    });
+    const booking = yield prisma_1.default.booking.findMany();
     return booking;
 });
 const getSingleBooking = (id) => __awaiter(void 0, void 0, void 0, function* () {
