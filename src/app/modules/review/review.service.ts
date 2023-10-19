@@ -2,10 +2,11 @@ import { Review } from '@prisma/client';
 import prisma from '../../../shared/prisma';
 
 const createReview = async (data: Review): Promise<Review> => {
+  console.log(data);
   const result = await prisma.review.create({
-    //@ts-ignore
     data,
   });
+
   return result;
 };
 

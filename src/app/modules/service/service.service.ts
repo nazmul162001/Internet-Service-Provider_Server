@@ -35,11 +35,11 @@ const updateService = async (
   id: string,
   data: Partial<Service>
 ): Promise<Service | null> => {
+  console.log(id, data)
   const service = await prisma.service.update({
     where: {
       id,
     },
-    //@ts-ignore
     data,
   });
   return service;

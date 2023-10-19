@@ -101,9 +101,8 @@ model Booking {
   email String
   district String
   thana String
-  price String
   address String
-  package Package
+  category Category
   userId String
   serviceId String
   user    User @relation(fields: [userId], references: [id])
@@ -113,7 +112,7 @@ model Booking {
   @@map("bookings")
 }
 
-enum Package {
+enum Category {
   wifiInternet
   mobileConnection
   tvBox

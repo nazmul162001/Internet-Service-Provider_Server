@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "Package" AS ENUM ('wifiInternet', 'mobileConnection', 'tvBox', 'smartHome', 'satelliteTv', 'internet', 'broadband', 'business');
+CREATE TYPE "Category" AS ENUM ('wifiInternet', 'mobileConnection', 'tvBox', 'smartHome', 'satelliteTv', 'internet', 'broadband', 'business');
 
 -- CreateTable
 CREATE TABLE "users" (
@@ -44,7 +44,6 @@ CREATE TABLE "Cart" (
 -- CreateTable
 CREATE TABLE "reviews" (
     "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "userReview" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
@@ -94,7 +93,7 @@ CREATE TABLE "bookings" (
     "thana" TEXT NOT NULL,
     "price" TEXT NOT NULL,
     "address" TEXT NOT NULL,
-    "package" "Package" NOT NULL,
+    "category" "Category" NOT NULL,
     "userId" TEXT NOT NULL,
     "serviceId" TEXT NOT NULL,
     "status" TEXT NOT NULL DEFAULT 'pending',
