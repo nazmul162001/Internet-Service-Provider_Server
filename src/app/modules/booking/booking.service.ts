@@ -24,7 +24,7 @@ const updateBooking = async (
   return booking;
 };
 
-// delete booking
+// // delete booking
 const deleteBooking = async (id: string) => {
   const booking = await prisma.booking.delete({
     where: {
@@ -34,9 +34,58 @@ const deleteBooking = async (id: string) => {
   return booking;
 };
 
+// const deleteBooking = async (id: any) => {
+//   console.log(id);
+//   const booking = await prisma.booking.findUnique({
+//     where: {
+//       id,
+//     },
+//     include: {
+//       user: true, // Include related User
+//       service: true, // Include related Service
+//     },
+//   });
+
+//   if (!booking) {
+//     throw new Error('Booking not found.');
+//   }
+
+//   // Delete related User record
+//   if (booking.user) {
+//     await prisma.user.delete({
+//       where: {
+//         id: booking.user.id,
+//       },
+//     });
+//   }
+
+//   // Delete related Service record
+//   if (booking.service) {
+//     await prisma.service.delete({
+//       where: {
+//         id: booking.service.id,
+//       },
+//     });
+//   }
+
+//   // Delete the booking itself
+//   await prisma.booking.delete({
+//     where: {
+//       id,
+//     },
+//   });
+
+//   return 'Booking and related records deleted successfully.';
+// };
+
 // get all booking
 const getAllBooking = async () => {
-  const booking = await prisma.booking.findMany();
+  const booking = await prisma.booking.findMany({
+    include: {
+      user: true,
+      service: true,
+    },
+  });
   return booking;
 };
 
@@ -44,6 +93,10 @@ const getSingleBooking = async (id: string) => {
   const booking = await prisma.booking.findUnique({
     where: {
       id,
+    },
+    include: {
+      user: true,
+      service: true,
     },
   });
   return booking;

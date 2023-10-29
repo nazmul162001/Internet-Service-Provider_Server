@@ -24,7 +24,12 @@ const getSingleService = async (id: string) => {
       id,
     },
     include: {
-      reviews: true,
+      reviews: {
+        include: {
+          user: true,
+          service: true,
+        },
+      },
     },
   });
   return service;
@@ -35,7 +40,7 @@ const updateService = async (
   id: string,
   data: Partial<Service>
 ): Promise<Service | null> => {
-  console.log(id, data)
+  console.log(id, data);
   const service = await prisma.service.update({
     where: {
       id,

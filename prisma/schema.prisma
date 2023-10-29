@@ -18,6 +18,7 @@ model User {
   name             String           @default("")
   profileImage     String           @default("")
   phoneNumber      String           @default("")
+  feedbacks        FeedBack[]
   reviews          Review[]
   bookings         Booking[]
   carts Cart[]
@@ -71,6 +72,8 @@ model FeedBack {
   name String
   email String
   comments String
+  userId String
+  user User @relation(fields: [userId], references: [id])
 
   @@map("feedbacks")
 }
@@ -105,8 +108,8 @@ model Booking {
   category Category
   userId String
   serviceId String
-  user    User @relation(fields: [userId], references: [id])
-  service    Service @relation(fields: [serviceId], references: [id])
+  user    User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  service    Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
   status String @default("pending")
 
   @@map("bookings")

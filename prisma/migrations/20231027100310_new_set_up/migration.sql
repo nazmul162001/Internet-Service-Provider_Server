@@ -91,7 +91,6 @@ CREATE TABLE "bookings" (
     "email" TEXT NOT NULL,
     "district" TEXT NOT NULL,
     "thana" TEXT NOT NULL,
-    "price" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "category" "Category" NOT NULL,
     "userId" TEXT NOT NULL,

@@ -37,7 +37,12 @@ const deleteReview = async (id: string) => {
 
 // get all review
 const getAllReview = async () => {
-  const review = await prisma.review.findMany();
+  const review = await prisma.review.findMany({
+    include: {
+      user: true,
+      service: true,
+    },
+  });
   return review;
 };
 

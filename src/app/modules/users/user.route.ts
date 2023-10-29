@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/users', UserController.getAllUsers);
 router.get(
   '/profile',
-  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER),
+  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.USER),
   UserController.getUserProfile
 );
 router.get(
@@ -19,7 +19,7 @@ router.get(
 
 router.patch(
   '/users/:id',
-  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER),
+  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER, ENUM_USER_ROLE.SUPER_ADMIN),
   UserController.updateSingleUser
 );
 
