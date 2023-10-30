@@ -22,6 +22,7 @@ model User {
   reviews          Review[]
   bookings         Booking[]
   carts Cart[]
+  blogs Blog[]
 
   @@map("users")
 }
@@ -84,6 +85,8 @@ model Blog {
   name String
   images String
   description String
+  userId String
+  user User @relation(fields: [userId], references: [id])
   createdAt    DateTime      @default(now())
 
   @@map("blogs")
