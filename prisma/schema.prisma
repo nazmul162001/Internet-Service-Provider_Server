@@ -31,7 +31,7 @@ model Service {
   id   String  @id @default(uuid())
   name String   
   price Int
-  category Category
+  category String
   images String
   district String
   location String
