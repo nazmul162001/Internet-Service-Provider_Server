@@ -16,12 +16,7 @@ export type IServiceFilterRequest = {
 };
 
 // for search
-export const ServiceSearchAbleFields = [
-  'name',
-  'category',
-  'price',
-  'location',
-];
+export const ServiceSearchAbleFields = ['name', 'category', 'location'];
 
 // for filter
 export const ServiceFilterAbleFields = [

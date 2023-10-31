@@ -36,7 +36,11 @@ const deleteBlog = async (id: string) => {
 
 // get all blog
 const getAllBlog = async () => {
-  const blogs = await prisma.blog.findMany();
+  const blogs = await prisma.blog.findMany({
+    include: {
+      user: true,
+    },
+  });
   return blogs;
 };
 

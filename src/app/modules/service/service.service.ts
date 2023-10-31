@@ -107,9 +107,10 @@ const getAllService = async (
     }
   }
 
-  // price query
+  // search term
 
   if (search) {
+    // console.log(search);
     andConditions.push({
       OR: ServiceSearchAbleFields.map(field => ({
         [field]: {
