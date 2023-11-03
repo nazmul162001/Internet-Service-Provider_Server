@@ -43,7 +43,12 @@ const deleteReview = (id) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // get all review
 const getAllReview = () => __awaiter(void 0, void 0, void 0, function* () {
-    const review = yield prisma_1.default.review.findMany();
+    const review = yield prisma_1.default.review.findMany({
+        include: {
+            user: true,
+            service: true,
+        },
+    });
     return review;
 });
 exports.ReviewService = {

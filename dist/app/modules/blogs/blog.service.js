@@ -43,7 +43,11 @@ const deleteBlog = (id) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // get all blog
 const getAllBlog = () => __awaiter(void 0, void 0, void 0, function* () {
-    const blogs = yield prisma_1.default.blog.findMany();
+    const blogs = yield prisma_1.default.blog.findMany({
+        include: {
+            user: true,
+        },
+    });
     return blogs;
 });
 const getSingleBlog = (id) => __awaiter(void 0, void 0, void 0, function* () {

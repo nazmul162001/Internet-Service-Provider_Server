@@ -32,7 +32,7 @@ const updateBooking = (id, data) => __awaiter(void 0, void 0, void 0, function* 
     });
     return booking;
 });
-// delete booking
+// // delete booking
 const deleteBooking = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const booking = yield prisma_1.default.booking.delete({
         where: {
@@ -41,15 +41,62 @@ const deleteBooking = (id) => __awaiter(void 0, void 0, void 0, function* () {
     });
     return booking;
 });
+// const deleteBooking = async (id: any) => {
+//   console.log(id);
+//   const booking = await prisma.booking.findUnique({
+//     where: {
+//       id,
+//     },
+//     include: {
+//       user: true, // Include related User
+//       service: true, // Include related Service
+//     },
+//   });
+//   if (!booking) {
+//     throw new Error('Booking not found.');
+//   }
+//   // Delete related User record
+//   if (booking.user) {
+//     await prisma.user.delete({
+//       where: {
+//         id: booking.user.id,
+//       },
+//     });
+//   }
+//   // Delete related Service record
+//   if (booking.service) {
+//     await prisma.service.delete({
+//       where: {
+//         id: booking.service.id,
+//       },
+//     });
+//   }
+//   // Delete the booking itself
+//   await prisma.booking.delete({
+//     where: {
+//       id,
+//     },
+//   });
+//   return 'Booking and related records deleted successfully.';
+// };
 // get all booking
 const getAllBooking = () => __awaiter(void 0, void 0, void 0, function* () {
-    const booking = yield prisma_1.default.booking.findMany();
+    const booking = yield prisma_1.default.booking.findMany({
+        include: {
+            user: true,
+            service: true,
+        },
+    });
     return booking;
 });
 const getSingleBooking = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const booking = yield prisma_1.default.booking.findUnique({
         where: {
             id,
+        },
+        include: {
+            user: true,
+            service: true,
         },
     });
     return booking;

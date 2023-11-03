@@ -41,7 +41,12 @@ const getSingleService = (id) => __awaiter(void 0, void 0, void 0, function* () 
             id,
         },
         include: {
-            reviews: true,
+            reviews: {
+                include: {
+                    user: true,
+                    service: true,
+                },
+            },
         },
     });
     return service;
@@ -104,8 +109,9 @@ const getAllService = (filters, options, priceQuery) => __awaiter(void 0, void 0
             });
         }
     }
-    // price query
+    // search term
     if (search) {
+        // console.log(search);
         andConditions.push({
             OR: service_interface_1.ServiceSearchAbleFields.map(field => ({
                 [field]: {

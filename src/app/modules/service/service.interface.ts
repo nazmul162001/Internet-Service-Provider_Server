@@ -25,6 +25,7 @@ export const ServiceFilterAbleFields = [
   'category',
   'price',
   'location',
+  'district',
 ];
 
 export type IPriceFilters = {
