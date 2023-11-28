@@ -10,5 +10,6 @@ exports.ServiceFilterAbleFields = [
     'category',
     'price',
     'location',
+    'district',
 ];
 exports.PriceSearchableFields = ['maxPrice', 'minPrice'];
